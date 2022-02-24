@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Tirage au sort Javascript</title>
+
+    <script>
+        
+		let tableau = [];
+		window.onload = function(){
+
+		    document.getElementById('form').addEventListener('submit',function(e){
+			    e.preventDefault()
+
+				let h = new Tirage(document.getElementById("name").value)
+                
+				tableau.push(h)
+                //console.log(h);
+				console.log(tableau);
+				input(tableau);
+
+		    })
+
+            document.getElementById('hasard').addEventListener('click', ()=>{
+                console.log(tableau.length)
+                let n;
+                n = Math.round(Math.random()* (tableau.length-1))
+                console.log("n=",n)
+                document.querySelector('#hasard_p').innerHTML = tableau[n].name;
+        })
+	}
+	
+	class Tirage{
+		name
+
+		constructor(...args){
+        if(args[0])
+        this.name = args[0]
+        }
+	}
+	function input(e){
+            
+
+		    document.querySelector('#list').innerHTML = tableau.map(
+				x=>{ 
+			  return `<p>${x.name}</p>`
+
+				}
+			).join('')
+			
+	}
+		
+		   
+	</script>
+</head>
+<body>
+    <h2>Tirage au sort Javascript</h2>
+    <h2>LIST</h2>
+    <div id="list">
+        
+    </div>
+    <form id="form">
+        <p>
+            <label for="name"></label>
+            <input type="text" name="name" id="name" required>
+        </p>
+        <p>
+            <button type="submit">Ajouter</button>
+        </p>
+    </form>
+    <h2>Afficher une entrée au hasard</h2>
+    <p id="hasard_p"></p>
+    <button id="hasard">hasard</button>
+
+</body>
+</html>
